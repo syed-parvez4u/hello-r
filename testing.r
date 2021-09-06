@@ -108,4 +108,107 @@ x[1,2]
 x[1,2,drop=FALSE]
 
 
+##Subsetting List
+x<-list(weekday=1:4,rain_prob=0.6)
+$weekday
+x[1]
+x[2]
 
+x<-list(weekday=1:4,rain_prob=0.6,item="umbrela")
+x[c(1,3)]
+x[c(2,3)]
+
+x<-list(a=list(10,12,14),b=c(3.14,2.81))
+x[[c(1.3)]]
+
+##Removing NA
+x<-c(2,3,NA,4,NA)
+is.na(x)
+bad<-is.na(x)
+bad
+!bad
+x[!bad]
+
+x<-c(1,2,NA,4,NA,5)
+y<-c("a","b",NA,"d",NA,"f")
+good<-complete.cases(x,y)
+good
+x[good]
+y[good]
+
+
+airquality
+view(airquality)
+
+a<-airquality
+a[1:6,]
+good<-complete.cases(a)
+a[good,][1,6,]
+airquality[good,][1,6,]
+
+##control structures
+x<-4
+y<-3
+
+y<-if(x>3){
+  10
+}else{
+  0
+}
+y  
+
+for(i in 1:10){
+  print(i)
+}
+
+x<-c("a","b","c","d")
+for(i in 1:4){
+  print(x[i])
+}
+
+for(i in seq_along(x)){
+  print(x[i])
+}
+
+for(letter in x){
+  print(letter)
+}
+
+for(i in 1:4) print(x[i])
+
+x<-matrix(1:6,2,3)  
+
+for(i in seq_len(nrow(x))){
+  for(j in seq_len(ncol(x))){
+    print(x[i,j])
+  }
+}
+
+count<-0
+while(count<10){
+  print(count)
+  count<-count+1
+}
+
+z<-5
+while(z>=3 && z<=10){
+  print(z)
+  coin<-rbinom(1,1,0.5)
+  
+  if(coin==1){
+    z<-z+1
+  }else{
+    z<-z-1
+  }
+}
+
+##Functions
+x<-rnorm(100)
+sd(x)
+
+
+f<-function(a,b){
+  print(a)
+  print(b)
+}
+f(45)
