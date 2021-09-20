@@ -212,3 +212,89 @@ f<-function(a,b){
   print(b)
 }
 f(45)
+
+##Vectorized operations
+x<-1:4;y<-6:9
+x+y
+x>2
+x<=2
+
+rep(1,5)
+
+##vectorised matrix operations
+x<-matrix(1:4,2,2);y<-matrix(rep(10,4),2,2)
+x*y   ##elementwise multiplications [,1][,2]
+
+x/y
+
+x%*%y  ##true multiplications
+
+
+##Date and Time
+as.Date("1970-01-01")
+
+as.POSIXct("1970-01-01")
+as.POSIXlt("1970-01-01")
+
+x<-Sys.time()
+x
+p<-as.POSIXlt(x)
+p
+names(unclass(p))
+names(unclass(p))
+p$sec
+p$mon
+
+datestring<-c("January 10, 2012 10:40","December 9, 2011 9:10")
+x<-strptime(datestring,"%B %d,%Y %H:%M")
+x
+class(x)
+
+##Loop functions
+##1.Lapply  (list format)
+x<-list(a=1:5,b=rnorm(10))
+lapply(x,mean)
+
+x<-1:4
+lapply(x,runif,min=50,max=100)
+
+##2.sapply (enhance version of Lapply) (simplyfy results)
+x<-list(a=1:4,b=rnorm(10),c=rnorm(20,1),d=rnorm(100,5))
+sapply(x,mean)
+
+##3.apply (array or matrix)
+x<-matrix(rnorm(200),20,10)
+x
+apply(x,1,mean) ## 1 is for row
+apply(x,2,mean) ## 2 is for column
+rowSums(x) ## instead of apply row operation
+colSums(x) ## instead of apply col operation
+rowMeans(x)
+colMeans(x)
+
+apply(x,1,quantile)
+apply(x,1,quantile,probs=c(0.25,0.75))
+
+
+##4.tapply (subset of vector)
+x<-c(rnorm(10),runif(10),rnorm(10))
+f<-gl(3,10)     
+tapply(x,f,mean)
+rnorm(10)
+rnorm(10)
+
+tapply(x,f,mean,simplify=FALSE)
+
+tapply(x,f,range)
+
+
+##Data split
+x<-c(rnorm(10),runif(10),rnorm(10))
+f<-gl(3,10)
+split(x,f)
+
+library(datasets)
+head(airquality)
+s<-split(airquality,airquality$Month)
+lapply(s,function(x) colSums(x[,c("Ozone","Solar.R","Wind")]))
+sapply(s,function(x) colMeans(x[,c("Ozone","Solar.R","Wind")]))
