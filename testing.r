@@ -298,3 +298,8 @@ head(airquality)
 s<-split(airquality,airquality$Month)
 lapply(s,function(x) colSums(x[,c("Ozone","Solar.R","Wind")]))
 sapply(s,function(x) colMeans(x[,c("Ozone","Solar.R","Wind")]))
+sapply(s,function(x) colMeans(x[,c("Ozone","Solar.R","Wind")],na.rm=TRUE))       
+
+
+
+

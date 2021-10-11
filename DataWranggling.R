@@ -43,3 +43,23 @@ head(cameradata)
 
 xlsx_example<-readxl_example("datasets.xls")
 read_excel(xlsx_example)
+
+
+##read data from web page
+library(rvest)
+
+theurl<-"http://en.wikipedia.org/wiki/Brazil_national_football_team"
+file<-read_html(theurl)
+
+tables<-html_nodes(file,"table")
+table1<-html_table(tables[2],fill=TRUE)
+print(table1)
+
+
+lego_movie<-read_html("http://www.imdb.com/title/tt1490017/")
+
+rating<-lego_movie %>%
+  html_nodes("strong span")%>%
+  html_text %>%  
+  as.numeric()  
+rating
